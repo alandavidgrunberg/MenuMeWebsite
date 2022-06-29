@@ -32,7 +32,7 @@ def save_item_details_html(dish_name, img_url, translated_name, allergy_informat
         allergy_html = ""
     else:
         allergy_html = f'''<h4>Allergy Information</h4>
-                    <p>{allergy_information}</p>'''                
+                    <p>{allergy_information}</p>'''
     # Ingredients
     if ingredients == 'No ingredients found':
         ingredients_html = ''
@@ -59,7 +59,7 @@ def save_item_details_html(dish_name, img_url, translated_name, allergy_informat
                     <img class="img-star-menu" src="{menu_loc_url}">'''
     result = f'''<html>
         <head>
-            <link rel="stylesheet" href="https://storage.googleapis.com/menu_me_bucket/styles.css">
+            <link rel="stylesheet" href="https://storage.googleapis.com/menume_clone/styles.css">
             <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
             <title>Menu.me: {dish_name}</title>
             <link rel=”icon" href="hhttps://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/pizza_1f355.png">
@@ -116,8 +116,8 @@ st.title('Menu.me')
 target_language = 'en'
 # Setup the Google Storage
 credentials = service_account.Credentials.from_service_account_info(json.loads(CREDENTIALS_JSON_GOOGLE_CLOUD))
-client = storage.Client(credentials=credentials, project='menu-me-352703')
-bucket = client.get_bucket('menu_me_bucket')
+client = storage.Client(credentials=credentials, project='alandavidgrunberg')
+bucket = client.get_bucket('menume_clone')
 
 # sub_title = '👈 Open side bar to upload your menu'
 
@@ -161,9 +161,9 @@ if uploaded_file is not None:
 
 
     # Start calling API to get dish name
-    base_url = f'https://menu-me-api-rmype5shcq-as.a.run.app'
-    menu_img_url = f"{base_url}/dish?path=https://storage.googleapis.com/menu_me_bucket/menu-{date_time}.jpg"
-    print(f'----> PHOTO OF MENU saved on cloud storage: https://storage.googleapis.com/menu_me_bucket/menu-{date_time}.jpg')
+    base_url = f'https://menume-jf6nzctgyq-as.a.run.app/'
+    menu_img_url = f"{base_url}/dish?path=https://storage.googleapis.com/menume_clone/menu-{date_time}.jpg"
+    print(f'----> PHOTO OF MENU saved on cloud storage: https://storage.googleapis.com/menume_clone/menu-{date_time}.jpg')
     with st.spinner('Our kitchen is cooking the secret recipe, please wait... 👩‍🍳'):
         finish = False
         run_times = 0
@@ -224,7 +224,7 @@ if uploaded_file is not None:
                 item_html_blob.upload_from_filename(item_html_url)
 
                 # full path to html link in cloud storage:
-                html_link = f"https://storage.googleapis.com/menu_me_bucket/{item_html_url}"
+                html_link = f"https://storage.googleapis.com/menume_clone/{item_html_url}"
                 print('----> FULL HTML RENDER LINK for each item: ', html_link)
 
                 display_menu_item(dish_name, img_url, translated_name, html_link)
